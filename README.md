@@ -1,3 +1,17 @@
 # ENEE457-team8
 Docker install instructions [here](https://docs.docker.com/engine/install/)  
-Docker compose quickstart instructions followed for first commit are [here](https://docs.docker.com/compose/gettingstarted)
+
+Run using
+```bash
+    docker compose up -d
+```
+
+Examine containers using
+```bash
+    docker ps -a
+```
+
+Start shell in container using
+```bash
+    docker exec -it <container_name> sh
+```
