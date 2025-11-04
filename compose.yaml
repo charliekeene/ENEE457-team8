@@ -3,6 +3,8 @@ services:
     build: ./actors/actor1/
   actor2:
     build: ./actors/actor2/
+  zigbee_hub:
+    build: ./actors/zigbee_hub/
 
 networks:
   default:
