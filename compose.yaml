@@ -1,7 +1,13 @@
 services:
-  web:
-    build: .
-    ports:
-      - "8000:5000"
-  redis:
-    image: "redis:alpine"
+  actor1:
+    build: ./actors/actor1/
+  actor2:
+    build: ./actors/actor2/
+  zigbee_hub:
+    build: ./actors/zigbee_hub/
+
+networks:
+  default:
+    name: sim_net
+    driver: bridge
+    attachable: true
