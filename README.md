@@ -8,7 +8,7 @@ Run using
     docker compose up -d
 ```
 
-Containers will need a rebuild after changing image/scripts. Use
+Containers will need a rebuild after changing Dockerfile. Use
 ```bash
     docker compose up -d --force-recreate --build
 ```
