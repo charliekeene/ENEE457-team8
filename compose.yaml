@@ -1,19 +1,24 @@
 services:
+  ids:
+    build: ./actors/ids/
+    volumes: 
+      - ./scripts:/scripts
+    entrypoint: ["python3", "-u", "/scripts/ids.py"]
   actor1:
     build: ./actors/actor1/
     volumes: 
       - ./scripts:/scripts
-    entrypoint: ["python3", "/scripts/actor1.py"]
+    entrypoint: ["python3", "-u", "/scripts/actor1.py"]
   actor2:
     build: ./actors/actor2/
     volumes: 
       - ./scripts:/scripts
-    entrypoint: ["python3", "/scripts/actor2.py"]
+    entrypoint: ["python3", "-u", "/scripts/actor2.py"]
   zigbee_hub:
     build: ./actors/zigbee_hub/
     volumes: 
       - ./scripts:/scripts
-    entrypoint: ["python3", "/scripts/http_script.py"]
+    entrypoint: ["python3", "-u", "/scripts/http_script.py"]
 
 networks:
   default:
