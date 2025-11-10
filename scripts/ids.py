@@ -64,7 +64,7 @@ def detect_syn_attack(packet):
             # DDoS Check
             if total_syn_count > TOTAL_THRESHOLD:
                 print(f"*** ALERT: Port {dport} is flooded from multiple IP addresses ***")
-                print(f"    SYN Count {syn_counts[key]} > Threshold {TOTAL_THRESHOLD}")
+                print(f"    SYN Count {total_syn_count} > Threshold {TOTAL_THRESHOLD}")
 
     # Run the reset check
     check_for_reset()
