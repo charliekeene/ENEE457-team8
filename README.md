@@ -28,3 +28,6 @@ Network Overview
 - actor2: Nothing yet
 - zigbee_hub: Hub for zigbee network, modeled after Phillips Hue Bridge. Currently sends HTTP GET every 30 seconds
 - test_app: Test app from docker compose quickstart
+
+Feature Overview
+- SYN Attack Detection: Detect if too many SYN packets are received on the same port in a given time window (typically indicative of a DOS attack)
