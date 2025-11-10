@@ -4,6 +4,8 @@ services:
     volumes: 
       - ./scripts:/scripts
     entrypoint: ["python3", "-u", "/scripts/ids.py"]
+  syn_flood:
+    build: ./actors/syn_flood/
   actor1:
     build: ./actors/actor1/
     volumes: 

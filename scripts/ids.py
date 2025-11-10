@@ -23,6 +23,10 @@ port_filter = " or ".join([f"port {p}" for p in TARGET_PORTS])
 SCAPY_FILTER = f"tcp and ({port_filter})"
 
 def check_for_reset():
+    global last_check_time
+    global syn_counts
+    global total_syn_count
+
     current_time = time.time()
     # Check is window is finished and if so, reset system
     if (current_time - last_check_time) >= WINDOW_SIZE:
@@ -31,6 +35,8 @@ def check_for_reset():
         total_syn_count = 0
 
 def detect_syn_attack(packet):
+    global syn_counts
+    global total_syn_count
     
     # Check if the packet has TCP and IP layers
     if packet.haslayer(TCP) and packet.haslayer(IP):
