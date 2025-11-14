@@ -5,8 +5,4 @@ while True:
     print("Sending GET request to ", url)
     r = requests.get(url = url)
 
-    data = r.json()
-
-    
-
     time.sleep(30)
