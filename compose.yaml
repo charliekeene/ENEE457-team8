@@ -4,7 +4,7 @@ services:
     volumes: 
       - ./scripts:/scripts
       - ./ids_logs:/app/logs # For detection logging
-    entrypoint: ["/bin/sh", "-c", "python3 -u /scripts/ids.py > /app/logs/ids_out.log 2>&1"]
+    entrypoint: ["python3", "-u", "/scripts/ids.py"]
   syn_flood:
     build: ./actors/syn_flood/
     volumes: 
