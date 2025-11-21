@@ -5,4 +5,3 @@ RUN apk update \
        hping3 \
        libpcap \
     && rm -rf /var/cache/apk/*
-CMD hping3 -S enee457-team8-ids-1 -p 443 --flood --rand-source
