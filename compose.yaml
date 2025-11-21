@@ -3,7 +3,13 @@ services:
     build: ./actors/ids/
     volumes: 
       - ./scripts:/scripts
+      - ./ids_logs:/app/logs # For detection logging
     entrypoint: ["python3", "-u", "/scripts/ids.py"]
+  syn_flood:
+    build: ./actors/syn_flood/
+    volumes: 
+      - ./scripts:/scripts
+    entrypoint: ["./scripts/syn_flood_attack.sh"]
   actor1:
     build: ./actors/actor1/
     volumes: 
@@ -25,3 +31,8 @@ networks:
     name: sim_net
     driver: bridge
     attachable: true
+    ipam:
+      driver: default
+      config:
+        # CIDR range for the entire network
+        - subnet: 172.19.0.0/16

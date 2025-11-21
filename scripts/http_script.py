@@ -1,7 +1,7 @@
 import time, requests
 
 while True:
-    url = "https://eolt9nnljpp9uau.m.pipedream.net"
+    url = "https://httpbin.org/get"
     print("Sending GET request to ", url)
     r = requests.get(url = url)
 
