@@ -1,38 +1,53 @@
 services:
+  controller:
+    build: ./actors/controller/
+    networks:
+      - control
+    volumes:
+    - ./scripts:/scripts
   ids:
     build: ./actors/ids/
+    networks:
+      - sim_net
+      - control
     volumes: 
       - ./scripts:/scripts
       - ./ids_logs:/app/logs # For detection logging
-    entrypoint: ["python3", "-u", "/scripts/ids.py"]
-  syn_flood:
-    build: ./actors/syn_flood/
-    volumes: 
-      - ./scripts:/scripts
-    entrypoint: ["./scripts/syn_flood_attack.sh"]
   actor1:
     build: ./actors/actor1/
+    networks:
+      - sim_net
+      - control
     volumes: 
       - ./scripts:/scripts
-    entrypoint: ["python3", "-u", "/scripts/actor1.py"]
   actor2:
     build: ./actors/actor2/
+    networks:
+      - sim_net
+      - control
     volumes: 
       - ./scripts:/scripts
-    entrypoint: ["python3", "-u", "/scripts/actor2.py"]
+    expose:
+      - "8000"
   zigbee_hub:
     build: ./actors/zigbee_hub/
+    networks:
+      - sim_net
+      - control
     volumes: 
       - ./scripts:/scripts
-    entrypoint: ["python3", "-u", "/scripts/http_script.py"]
 
 networks:
-  default:
-    name: sim_net
+  control:
+    driver: bridge
+    attachable: true
+    ipam:
+      config:
+        - subnet: 172.28.0.0/24
+  sim_net:
     driver: bridge
     attachable: true
     ipam:
       driver: default
       config:
-        # CIDR range for the entire network
-        - subnet: 172.19.0.0/16
+        - subnet: 172.29.0.0/16
