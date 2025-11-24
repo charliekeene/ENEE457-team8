@@ -1,27 +1,22 @@
 from fastapi import FastAPI
 import uvicorn
 import subprocess
+import threading
 import os
 
 app = FastAPI()
 
+def run_script_thread(script):
+    import subprocess
+    subprocess.Popen(["python3", "-u", f"/scripts/{script}"])
+
 @app.post("/run-script")
 def run_script(script: str):
-    script_path = os.path.join("/scripts", script)
-
-    if not os.path.isfile(script_path):
-        return {"error": f"Script '{script}' not found."}
-
-    # Execute the script
-    result = subprocess.run(
-        ["python3", script_path], capture_output=True, text=True
-    )
+    threading.Thread(target=run_script_thread, args=(script,)).start()
 
     return {
         "script": script,
-        "stdout": result.stdout,
-        "stderr": result.stderr,
-        "returncode": result.returncode,
+        "status": "Started"
     }
 
 if __name__ == "__main__":
