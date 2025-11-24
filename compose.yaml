@@ -2,29 +2,32 @@ services:
   controller:
     build: ./actors/controller/
     networks:
-      - control
+      control:
     volumes:
     - ./scripts:/scripts
   ids:
     build: ./actors/ids/
     networks:
-      - sim_net
-      - control
+      control:
+        gw_priority: 1
+      sim_net:
     volumes: 
       - ./scripts:/scripts
       - ./ids_logs:/app/logs # For detection logging
   actor1:
     build: ./actors/actor1/
     networks:
-      - sim_net
-      - control
+      control:
+        gw_priority: 1
+      sim_net:
     volumes: 
       - ./scripts:/scripts
   actor2:
     build: ./actors/actor2/
     networks:
-      - sim_net
-      - control
+      control:
+        gw_priority: 1
+      sim_net:
     volumes: 
       - ./scripts:/scripts
     expose:
@@ -32,8 +35,9 @@ services:
   zigbee_hub:
     build: ./actors/zigbee_hub/
     networks:
-      - sim_net
-      - control
+      control:
+        gw_priority: 1
+      sim_net:
     volumes: 
       - ./scripts:/scripts
 
@@ -43,7 +47,7 @@ networks:
     attachable: true
     ipam:
       config:
-        - subnet: 172.28.0.0/24
+        - subnet: 172.28.0.0/16
   sim_net:
     driver: bridge
     attachable: true

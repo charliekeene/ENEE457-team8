@@ -4,8 +4,8 @@ import time
 # Main IDS function
 # Put any packet detection methods in here
 def ids(packet):
-    # print(packet.summary()) <- used to test, but this will spam the console so double Ctrl-C to stop
-    syn_attack(packet)
+    print(packet.summary()) # <- used to test, but this will spam the console so double Ctrl-C to stop
+    # syn_attack(packet)
 
 def syn_attack(packet):
     # Parameters
@@ -57,4 +57,5 @@ def syn_attack(packet):
 
 # Sniff all packets on eth0
 # Filters can be added as desired (e.g. TCP only, certain ports, etc.)
-sniff(iface="eth0", prn=ids, count=0)
+print("Starting sniff")
+sniff(iface="eth1", prn=ids, count=0)
