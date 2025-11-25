@@ -1,3 +1,8 @@
+# overview: to build normal profile. Reads the baseline raw packet log 
+# uses the same feature extraction method to count SYN packets per second in the baseline
+# computes normal metrics such as the maximum SYN rate in baseline 
+
+
 import json
 from packets_to_features import extract_features
 
