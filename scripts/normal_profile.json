@@ -1,0 +1,5 @@
+{
+    "max_syn_per_sec": 1,
+    "avg_syn_per_sec": 1.0,
+    "threshold_syn_per_sec": 3
+}
