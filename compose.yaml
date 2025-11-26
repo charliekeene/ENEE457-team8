@@ -5,31 +5,42 @@ services:
       control:
     volumes:
     - ./scripts:/scripts
+    - ./logs:/logs
   ids:
     build: ./actors/ids/
-    networks:
-      control:
-        gw_priority: 1
-      sim_net:
+    cap_add:
+      - NET_RAW
+      - NET_ADMIN
+    network_mode: host
     volumes: 
       - ./scripts:/scripts
-      - ./ids_logs:/app/logs # For detection logging
+      - ./logs:/logs
   actor1:
     build: ./actors/actor1/
     networks:
       control:
         gw_priority: 1
+        aliases: 
+          - actor1_control
       sim_net:
+        aliases:
+          - actor1_sim
     volumes: 
       - ./scripts:/scripts
+      - ./logs:/logs
   actor2:
     build: ./actors/actor2/
     networks:
       control:
         gw_priority: 1
+        aliases:
+          - actor2_control
       sim_net:
+        aliases:
+          - actor2_sim
     volumes: 
       - ./scripts:/scripts
+      - ./logs:/logs
     expose:
       - "8000"
   zigbee_hub:
@@ -37,9 +48,14 @@ services:
     networks:
       control:
         gw_priority: 1
+        aliases:
+          - zigbee_hub_control
       sim_net:
+        aliases:
+          - zigbee_hub_sim
     volumes: 
       - ./scripts:/scripts
+      - ./logs:/logs
 
 networks:
   control:

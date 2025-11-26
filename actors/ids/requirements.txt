@@ -2,3 +2,4 @@ scapy
 requests
 fastapi
 uvicorn
+libpcap
