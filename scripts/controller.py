@@ -8,7 +8,7 @@ script = "syn_flood.py"
 
 print(f"[*] Sending '{script}' to {host}")
 try:
-    r = requests.post(f"http://enee457-team8-{host}-1:8000/run-script?script={script}")
+    r = requests.post(f"http://{host}_control:8000/run-script?script={script}")
     print(r.json())
 except Exception as e:
     print(f"[!] Error sending to {host}: {e}")
