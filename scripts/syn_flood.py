@@ -1,3 +1,6 @@
+# Send both DoS and DDoS SYN flood attacks using hping3
+import os
+import subprocess
 import time
 import random
 import subprocess
