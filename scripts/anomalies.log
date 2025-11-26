@@ -1,0 +1,6 @@
+{"time": "2025-11-24 23:41:23", "source_ip": "10.0.0.1", "syn_count": 37, "threshold": 3, "description": "SYN flood suspected: too many SYN packets"}
+{"time": "2025-11-24 23:41:24", "source_ip": "10.0.0.1", "syn_count": 81, "threshold": 3, "description": "SYN flood suspected: too many SYN packets"}
+{"time": "2025-11-24 23:41:25", "source_ip": "10.0.0.1", "syn_count": 45, "threshold": 3, "description": "SYN flood suspected: too many SYN packets"}
+{"time": "2025-11-24 23:41:23", "source_ip": "10.0.0.1", "syn_count": 37, "threshold": 3, "description": "SYN flood suspected: too many SYN packets"}
+{"time": "2025-11-24 23:41:24", "source_ip": "10.0.0.1", "syn_count": 81, "threshold": 3, "description": "SYN flood suspected: too many SYN packets"}
+{"time": "2025-11-24 23:41:25", "source_ip": "10.0.0.1", "syn_count": 45, "threshold": 3, "description": "SYN flood suspected: too many SYN packets"}
