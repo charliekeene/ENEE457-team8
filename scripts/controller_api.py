@@ -1,8 +1,6 @@
 from fastapi import FastAPI
 import uvicorn
-import subprocess
 import threading
-import os
 
 app = FastAPI()
 
@@ -20,4 +18,4 @@ def run_script(script: str):
     }
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8000, log_level="error")

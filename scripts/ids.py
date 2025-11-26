@@ -72,6 +72,8 @@ for line in result.stdout.splitlines():
         if ip == "172.29.0.1":
             target_iface = iface 
 
+subprocess.run(["ip", "link", "set", target_iface, "promisc", "on"])
+
 # Sniff all packets on eth0
 # Filters can be added as desired (e.g. TCP only, certain ports, etc.)
 print("Starting sniff")
