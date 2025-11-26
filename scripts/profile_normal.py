@@ -18,7 +18,7 @@ def build_profile(baseline_file=BASELINE_FILE):
     """
     profile = {}
     # Extract SYN features from baseline data
-    syn_counts = extract_features(baseline_file)
+    syn_counts = extract_features(baseline_file, flag_filter="SYN")
     if not syn_counts:
         print("Baseline data is empty or not found.")
         return None
@@ -44,6 +44,24 @@ def build_profile(baseline_file=BASELINE_FILE):
     profile['max_syn_per_sec'] = max_syn_per_sec
     profile['avg_syn_per_sec'] = avg_syn_per_sec
     profile['threshold_syn_per_sec'] = threshold_syn_per_sec
+
+    # --- ICMP statistics (same approach as SYN) ---
+    icmp_counts = extract_features(baseline_file, flag_filter="ICMP")
+    max_icmp_per_sec = 0
+    total_icmp = 0
+    icmp_entries = 0
+    for (src, sec), count in icmp_counts.items():
+        total_icmp += count
+        icmp_entries += 1
+        if count > max_icmp_per_sec:
+            max_icmp_per_sec = count
+
+    avg_icmp_per_sec = (total_icmp / icmp_entries) if icmp_entries > 0 else 0
+    threshold_icmp_per_sec = 3 * max_icmp_per_sec if max_icmp_per_sec > 0 else 0
+
+    profile['max_icmp_per_sec'] = max_icmp_per_sec
+    profile['avg_icmp_per_sec'] = avg_icmp_per_sec
+    profile['threshold_icmp_per_sec'] = threshold_icmp_per_sec
 
     # Save profile to a JSON file for later use
     try:

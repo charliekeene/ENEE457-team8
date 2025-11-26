@@ -31,3 +31,4 @@ Network Overview
 
 Feature Overview
 - SYN Attack Detection: Detect if too many SYN packets are received on the same port in a given time window (typically indicative of a DOS attack)
+- ICMP Attack Detection: Detect if there are too many ICMP Type 8 packets being received in a given time window (typically indicative of a DoS/DDoS attack)

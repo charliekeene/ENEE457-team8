@@ -1,6 +1,7 @@
 from scapy.all import sniff, TCP, IP
 import time
 import syn_flood_detect
+import icmp_detect
 from globals import log
 import subprocess
 import re
@@ -10,10 +11,11 @@ import re
 def ids(packet):
     # print(packet.summary()) # <- used to test, but this will spam the console so double Ctrl-C to stop
     syn_flood_detect.process_packet(packet)
+    icmp_detect.process_packet(packet)
 
 # Object initialization
 syn_flood_detect = syn_flood_detect.syn_flood_detect(ip_threshold=1000, total_threshold=5000, window_size=5)
-
+icmp_detect = icmp_detect.icmp_flood_detect(ip_threshold=1000, total_threshold=5000, window_size=5)
 result = subprocess.run(
         ["ip", "-o", "addr", "show"],
         capture_output=True,
