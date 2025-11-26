@@ -4,7 +4,7 @@ import time
 time.sleep(15)
 
 host = "actor2"
-script = "null.py"
+script = "syn_flood.py"
 
 print(f"[*] Sending '{script}' to {host}")
 try:
