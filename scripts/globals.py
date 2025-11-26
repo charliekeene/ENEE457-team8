@@ -6,7 +6,7 @@ from datetime import datetime
 
 if "LOGFILE" not in globals():
 
-    log_dir = "/app/logs"
+    log_dir = "/logs"
     os.makedirs(log_dir, exist_ok=True)
 
     timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
@@ -14,7 +14,7 @@ if "LOGFILE" not in globals():
 
     SIM_START_TIME = time.time()
 
-    LOGFILE = open(os.path.join(log_dir, log_filename), "w")
+    LOGFILE = open(os.path.join(log_dir, log_filename), "a")
 
 # Write message to log with timestamp
 def log(msg):
