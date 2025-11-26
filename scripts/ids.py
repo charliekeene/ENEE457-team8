@@ -1,18 +1,19 @@
 from scapy.all import sniff, TCP, IP
 import time
+import syn_flood_detect
+from globals import log
 import subprocess
 import re
 
 # Main IDS function
 # Put any packet detection methods in here
 def ids(packet):
+    # print(packet.summary()) # <- used to test, but this will spam the console so double Ctrl-C to stop
+    syn_flood_detect.process_packet(packet)
     print(packet.summary())
 
-def syn_attack(packet):
-    # Parameters
-    IP_THRESHOLD = 1000   # Number of acceptable SYN packets from a given IP (DoS)
-    TOTAL_THRESHOLD = 5000   # Number of acceptable SYN packets on a total port (DDoS)
-    WINDOW_SIZE = 5 # Size in seconds of a given measuring window
+# Object initialization
+syn_flood_detect = syn_flood_detect.syn_flood_detect(ip_threshold=1000, total_threshold=5000, window_size=5)
 
     # State Variables
     syn_counts = {}
