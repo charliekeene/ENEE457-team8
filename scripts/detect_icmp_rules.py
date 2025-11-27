@@ -5,7 +5,7 @@ from packets_to_features import extract_features
 # File paths for current run data and profile
 CURRENT_DATA_FILE = "data/features/packets_raw.csv"
 PROFILE_FILE = "data/features/normal_profile.json"
-ANOMALY_LOG_FILE = "data/features/anomalies_icmp.log" # not saving this in the other anomaly log file for now, to make sure this works rn lol
+ANOMALY_LOG_FILE = "data/features/anomalies.log" 
 
 def detect_icmp_flood(data_file=CURRENT_DATA_FILE, profile_file=PROFILE_FILE):
     """
