@@ -46,14 +46,12 @@ class Fingerprint:
             dst = packet[ARP].pdst
 
         # *** CHECK AGAINST RULES ***
-        if isinstance(self.min_size, dict) and "min_bytes" in self.min_size:
-            if size < self.min_size["min_bytes"]:
-                violations.append(f"Packet too small ({size} bytes)")
+        if size < self.min_size:
+            violations.append(f"Packet too small ({size} bytes)")
 
         # check max size
-        if isinstance(self.max_size, dict) and "max_bytes" in self.max_size:
-            if size > self.max_size["max_bytes"]:
-                violations.append(f"Packet too large ({size} bytes)")
+        if size > self.max_size:
+            violations.append(f"Packet too large ({size} bytes)")
 
         # check protocol
         if self.allowed_protocols and protoccol not in self.allowed_protocols:
