@@ -9,11 +9,13 @@ import fingerprint
 # Main IDS function
 # Put any packet detection methods in here
 def ids(packet):
-    print(packet.summary()) # <- used to test, but this will spam the console so double Ctrl-C to stop
+    # print(packet.summary()) # <- used to test, but this will spam the console so double Ctrl-C to stop
+    fingerprint.process_packet(packet)
     syn_flood_detect.process_packet(packet)
     fingerprint_detector.process_packet(packet)
 
 # Object initialization
+fingerprint = fingerprint.Fingerprint("scripts/fingerprint_rules.json")
 syn_flood_detect = syn_flood_detect.syn_flood_detect(ip_threshold=1000, total_threshold=5000, window_size=5)
 fingerprint_detector = fingerprint.Fingerprint("scripts/fingerprint_rules.json")
 
@@ -36,5 +38,6 @@ subprocess.run(["ip", "link", "set", target_iface, "promisc", "on"])
 
 # Sniff all packets on eth0
 # Filters can be added as desired (e.g. TCP only, certain ports, etc.)
+print(f"Using interface: {target_iface}")
 print("Starting sniff")
-sniff(iface=target_iface, prn=ids, count=0)
+sniff(iface=target_iface, prn=ids, store=False, count=0)
