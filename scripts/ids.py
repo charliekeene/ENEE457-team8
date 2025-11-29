@@ -8,7 +8,7 @@ import re
 # Main IDS function
 # Put any packet detection methods in here
 def ids(packet):
-    # print(packet.summary()) # <- used to test, but this will spam the console so double Ctrl-C to stop
+    print(packet.summary()) # <- used to test, but this will spam the console so double Ctrl-C to stop
     syn_flood_detect.process_packet(packet)
 
 # Object initialization

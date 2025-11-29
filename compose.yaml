@@ -77,6 +77,23 @@ services:
       - ./scripts:/scripts
       - ./logs:/logs
       - ./pcaps:/pcaps
+  amazon_alexa:
+    build: ./actors/amazon_alexa/
+    cap_add:
+      - NET_RAW
+      - NET_ADMIN
+    networks:
+      control:
+        gw_priority: 1
+        aliases:
+          - amazon_alexa_control
+      sim_net:
+        aliases:
+          - amazon_alexa_sim
+    volumes: 
+      - ./scripts:/scripts
+      - ./logs:/logs 
+      - ./pcaps:/pcaps
   zigbee_hub:
     build: ./actors/zigbee_hub/
     networks:

@@ -16,5 +16,7 @@ for line in result.stdout.splitlines():
     if match:
         iface, ip = match.groups()
 
-subprocess.run(f"tcprewrite --infile=/pcaps/phillips_hue.pcap --outfile=/modified_pcaps/phillips_hue.pcap --srcipmap=192.168.1.132:{ip} --dstipmap=192.168.1.1:172.29.0.1", shell=True)
+subprocess.run(f"tcprewrite --infile=/pcaps/phillips_hue.pcap --outfile=/modified_pcaps/phillips_hue1.pcap --srcipmap=192.168.1.132:{ip} --dstipmap=192.168.1.132:{ip}", shell=True)
+subprocess.run(f"tcprewrite --infile=/modified_pcaps/phillips_hue1.pcap --outfile=/modified_pcaps/phillips_hue.pcap --srcipmap=192.168.1.1:172.29.0.1 --dstipmap=192.168.1.1:172.29.0.1", shell=True)
+
 subprocess.run(f"tcpreplay --intf1={iface} /modified_pcaps/phillips_hue.pcap --loop=0 --mbps=10", shell=True)
