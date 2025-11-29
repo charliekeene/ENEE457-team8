@@ -43,6 +43,23 @@ services:
       - ./logs:/logs
     expose:
       - "8000"
+  phillips_hue:
+    build: ./actors/phillips_hue/
+    cap_add:
+      - NET_RAW
+      - NET_ADMIN
+    networks:
+      control:
+        gw_priority: 1
+        aliases:
+          - phillips_hue_control
+      sim_net:
+        aliases:
+          - phillips_hue_sim
+    volumes: 
+      - ./scripts:/scripts
+      - ./logs:/logs
+      - ./pcaps:/pcaps
   zigbee_hub:
     build: ./actors/zigbee_hub/
     networks:
