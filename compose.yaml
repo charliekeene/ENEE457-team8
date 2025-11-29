@@ -60,6 +60,23 @@ services:
       - ./scripts:/scripts
       - ./logs:/logs
       - ./pcaps:/pcaps
+  somfy:
+    build: ./actors/somfy/
+    cap_add:
+      - NET_RAW 
+      - NET_ADMIN
+    networks:
+      control:
+        gw_priority: 1
+        aliases:
+          - somfy_control
+      sim_net:
+        aliases:
+          - somfy_sim
+    volumes: 
+      - ./scripts:/scripts
+      - ./logs:/logs
+      - ./pcaps:/pcaps
   zigbee_hub:
     build: ./actors/zigbee_hub/
     networks:
