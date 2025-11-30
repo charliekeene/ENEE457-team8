@@ -24,10 +24,11 @@ Start shell in container using
 ```
 
 Network Overview
-- actor1: Sends pings to actor2 every 3 seconds
-- actor2: Nothing yet
-- zigbee_hub: Hub for zigbee network, modeled after Phillips Hue Bridge. Currently sends HTTP GET every 30 seconds
-- test_app: Test app from docker compose quickstart
+- actor1-3: randomized behavior communicating with ping, http to internet, tcp, udp, icmp random bytes to other hosts
+- amazon_alexa, phillips_hue, somfy: based on real pcaps from IoT-23. See citation below.
 
 Feature Overview
 - SYN Attack Detection: Detect if too many SYN packets are received on the same port in a given time window (typically indicative of a DOS attack)
+
+Citations  
+[1] Sebastian Garcia, Agustin Parmisano, & Maria Jose Erquiaga. (2020). IoT-23: A labeled dataset with malicious and benign IoT network traffic (Version 1.0.0) [Data set]. Zenodo. http://doi.org/10.5281/zenodo.4743746

@@ -43,19 +43,72 @@ services:
       - ./logs:/logs
     expose:
       - "8000"
-  zigbee_hub:
-    build: ./actors/zigbee_hub/
+  actor3:
+    build: ./actors/actor3/
     networks:
       control:
         gw_priority: 1
         aliases:
-          - zigbee_hub_control
+          - actor3_control
       sim_net:
         aliases:
-          - zigbee_hub_sim
+          - actor3_sim
     volumes: 
       - ./scripts:/scripts
       - ./logs:/logs
+    expose:
+      - "8000"
+  phillips_hue:
+    build: ./actors/phillips_hue/
+    cap_add:
+      - NET_RAW
+      - NET_ADMIN
+    networks:
+      control:
+        gw_priority: 1
+        aliases:
+          - phillips_hue_control
+      sim_net:
+        aliases:
+          - phillips_hue_sim
+    volumes: 
+      - ./scripts:/scripts
+      - ./logs:/logs
+      - ./pcaps:/pcaps
+  somfy:
+    build: ./actors/somfy/
+    cap_add:
+      - NET_RAW 
+      - NET_ADMIN
+    networks:
+      control:
+        gw_priority: 1
+        aliases:
+          - somfy_control
+      sim_net:
+        aliases:
+          - somfy_sim
+    volumes: 
+      - ./scripts:/scripts
+      - ./logs:/logs
+      - ./pcaps:/pcaps
+  amazon_alexa:
+    build: ./actors/amazon_alexa/
+    cap_add:
+      - NET_RAW
+      - NET_ADMIN
+    networks:
+      control:
+        gw_priority: 1
+        aliases:
+          - amazon_alexa_control
+      sim_net:
+        aliases:
+          - amazon_alexa_sim
+    volumes: 
+      - ./scripts:/scripts
+      - ./logs:/logs 
+      - ./pcaps:/pcaps
 
 networks:
   control:
