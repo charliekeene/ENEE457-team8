@@ -43,6 +43,21 @@ services:
       - ./logs:/logs
     expose:
       - "8000"
+  actor3:
+    build: ./actors/actor3/
+    networks:
+      control:
+        gw_priority: 1
+        aliases:
+          - actor3_control
+      sim_net:
+        aliases:
+          - actor3_sim
+    volumes: 
+      - ./scripts:/scripts
+      - ./logs:/logs
+    expose:
+      - "8000"
   phillips_hue:
     build: ./actors/phillips_hue/
     cap_add:
@@ -94,19 +109,6 @@ services:
       - ./scripts:/scripts
       - ./logs:/logs 
       - ./pcaps:/pcaps
-  zigbee_hub:
-    build: ./actors/zigbee_hub/
-    networks:
-      control:
-        gw_priority: 1
-        aliases:
-          - zigbee_hub_control
-      sim_net:
-        aliases:
-          - zigbee_hub_sim
-    volumes: 
-      - ./scripts:/scripts
-      - ./logs:/logs
 
 networks:
   control:

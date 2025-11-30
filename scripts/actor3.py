@@ -4,7 +4,7 @@ import random
 import requests
 import os
 
-hosts = ["actor1_sim", "actor3_sim", "phillips_hue_sim", "somfy_sim", "amazon_alexa_sim"]
+hosts = ["actor1_sim", "actor2_sim", "phillips_hue_sim", "somfy_sim", "amazon_alexa_sim"]
 operations = ["ping", "http_get", "http_post", "tcp", "udp", "icmp", "_"]
 get_url = "https://httpbin.org/get"
 post_url = "https://httpbin.org/post"
