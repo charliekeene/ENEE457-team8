@@ -1,0 +1,24 @@
+{
+  "allowed_ports": [22, 53, 67, 68, 80, 443],
+
+  "packet_size": {
+    "min_bytes": 40,
+    "max_bytes": 1500
+  },
+
+  "allowed_protocols": [
+    "IP",
+    "TCP",
+    "UDP",
+    "ICMP",
+    "DNS",
+    "ARP"
+  ],
+
+  "disallowed_ips": [
+    "10.0.0.99",
+    "192.168.1.66",
+    "203.0.113.15",
+    "198.51.100.77"
+  ]
+}
