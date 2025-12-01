@@ -4,8 +4,12 @@
 # Only detects ICMP Echo Request floods (which are type 8).
 
 from scapy.all import ICMP, IP
-from globals import log
 import time
+import logging
+
+logger = logging.getLogger("ids")
+FORMAT = "%(created)f %(message)s"
+logging.basicConfig(level=logging.INFO, format=FORMAT, filename="logs/ids.log")
 
 class icmp_flood_detect:
     def __init__(self, ip_threshold=1000, total_threshold=5000, window_size=5):
@@ -33,12 +37,12 @@ class icmp_flood_detect:
 
                 # DoS Check (per-source)
                 if (self.icmp_counts[src_ip] > self.IP_THRESHOLD) and (src_ip not in self.detected_ips):
-                    log(f"ICMP Flood (DoS), {src_ip}")
+                    logger.info(f"ICMP Flood (DoS), {src_ip}")
                     self.detected_ips.add(src_ip)
 
                 # DDoS Check (aggregate)
                 if (self.total_icmp_count > self.TOTAL_THRESHOLD) and (self.ddos_detected == False):
-                    log(f"ICMP Flood (DDoS), n/a")
+                    logger.info(f"ICMP Flood (DDoS), n/a")
                     self.ddos_detected = True
 
         current_time = time.time()
