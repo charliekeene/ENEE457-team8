@@ -11,10 +11,10 @@ import fingerprint
 def ids(packet):
     # print(packet.summary()) # <- used to test, but this will spam the console so double Ctrl-C to stop
     fingerprint_detector.process_packet(packet)
-    syn_flood_detect.process_packet(packet)
+    syn_flood_detector.process_packet(packet)
 
 # Object initialization
-syn_flood_detect = syn_flood_detect.syn_flood_detect(ip_threshold=1000, total_threshold=5000, window_size=5)
+syn_flood_detector = syn_flood_detect.syn_flood_detect(ip_threshold=1000, total_threshold=5000, window_size=5)
 fingerprint_detector = fingerprint.Fingerprint("scripts/fingerprint_rules.json")
 
 result = subprocess.run(
