@@ -41,6 +41,8 @@ class BadTrafficGenerator:
         violate_proto  = random.choice([True, False])
         violate_size   = random.choice([True, False])
 
+        if not (violate_ip or violate_port or violate_proto or violate_size):
+            violate_size = True  # Ensure at least one violation
 
         if violate_ip:
             src_ip = random.choice(list(self.disallowed_ips))
@@ -96,12 +98,13 @@ class BadTrafficGenerator:
                 Raw(payload)
             )
 
-        send(pkt, verbose=0)
-        print(f"Sending malformed packet to {dst_ip}, {pkt.summary()}")
+        for _ in range(random.randint(2,10)):
+            send(pkt, verbose=0)
+            print(f"Sent packet: IP={src_ip}->{dst_ip}, PORT={dst_port}, PROTO={proto}, SIZE={size} bytes")
 
 if __name__ == "__main__":
     gen = BadTrafficGenerator("scripts/fingerprint_rules.json")
 
     print("Generating bad traffic...")
 
-    packets = [gen.generate_packet() for _ in range(50)]
+    gen.generate_packet()
