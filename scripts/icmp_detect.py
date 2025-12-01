@@ -18,7 +18,8 @@ class icmp_flood_detect:
         self.icmp_counts = {}
         self.total_icmp_count = 0
         self.last_check_time = time.time()
-        self.detected = False
+        self.detected_ips = set()  # Track which IPs already alerted
+        self.ddos_detected = False  # Separate flag for DDoS
 
     def process_packet(self, packet):
         # Again, only considering type 8 packets (this is basically a ping request)
@@ -31,14 +32,14 @@ class icmp_flood_detect:
                 self.icmp_counts[src_ip] = self.icmp_counts.get(src_ip, 0) + 1
 
                 # DoS Check (per-source)
-                if (self.icmp_counts[src_ip] > self.IP_THRESHOLD) and (self.detected == False):
+                if (self.icmp_counts[src_ip] > self.IP_THRESHOLD) and (src_ip not in self.detected_ips):
                     log(f"ICMP Flood (DoS), {src_ip}")
-                    self.detected = True
+                    self.detected_ips.add(src_ip)
 
                 # DDoS Check (aggregate)
-                if (self.total_icmp_count > self.TOTAL_THRESHOLD) and (self.detected == False):
-                    log(f"ICMP Flood (DDoS), {self.total_icmp_count}") # total count
-                    self.detected = True
+                if (self.total_icmp_count > self.TOTAL_THRESHOLD) and (self.ddos_detected == False):
+                    log(f"ICMP Flood (DDoS), n/a")
+                    self.ddos_detected = True
 
         current_time = time.time()
         # Check if the window is finished and if so, reset system
@@ -46,4 +47,5 @@ class icmp_flood_detect:
             self.icmp_counts = {}
             self.last_check_time = current_time
             self.total_icmp_count = 0
-            self.detected = False
+            self.detected_ips = set()
+            self.ddos_detected = False
