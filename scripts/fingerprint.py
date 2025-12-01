@@ -34,6 +34,9 @@ class Fingerprint:
                 protoccol = "TCP"
                 sport = packet[TCP].sport
                 dport = packet[TCP].dport
+
+                if dport == 22:
+                    protoccol = "SSH"
             elif UDP in packet:
                 protoccol = "UDP"
                 sport = packet[UDP].sport
@@ -55,7 +58,7 @@ class Fingerprint:
 
         # check protocol
         if self.allowed_protocols and protoccol not in self.allowed_protocols:
-            violations.append(f"Disallowed protocol: {protoccol}")
+            violations.append(f"Disallowed protoccol: {protoccol}")
 
         # check ports
         if self.allowed_ports:

@@ -8,6 +8,9 @@ hosts = ["actor1_sim", "actor3_sim", "phillips_hue_sim", "somfy_sim", "amazon_al
 operations = ["ping", "http_get", "http_post", "tcp", "udp", "icmp", "_"]
 get_url = "https://httpbin.org/get"
 post_url = "https://httpbin.org/post"
+allowed_ports = [53, 67, 68, 80, 123, 1883, 443, 5683, 5684, 8883, 1900, 5353, 
+                 47808, 4840, 502, 44818, 2222, 10366, 32893, 37653, 52171, 57621, 58687]
+
 
 while True:
     sleep_time = random.randint(5, 15)
@@ -28,13 +31,13 @@ while True:
             r = requests.post(url = post_url, data = {'temp': '22C', 'humidity': '45%'})
         case "tcp":
             print("Sending TCP packet to", target)
-            dst_port = random.randint(1024, 65535)
+            dst_port = random.choice(allowed_ports)
             src_port = random.randint(1024, 65535)
             packet = IP(dst=target)/TCP(sport=src_port, dport=dst_port)/payload
             send(packet, verbose=0)
         case "udp":
             print("Sending UDP packet to", target)
-            dst_port = random.randint(1024, 65535)
+            dst_port = random.choice(allowed_ports)
             packet = IP(dst=target)/UDP(dport=dst_port)/payload
             send(packet, verbose=0)
         case "icmp":
