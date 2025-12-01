@@ -29,6 +29,7 @@ Network Overview
 
 Feature Overview
 - SYN Attack Detection: Detect if too many SYN packets are received on the same port in a given time window (typically indicative of a DOS attack)
+- ICMP Attack Detection: Detect if there are too many ICMP Type 8 packets being received in a given time window (typically indicative of a DoS/DDoS attack)
 
 Citations  
 [1] Sebastian Garcia, Agustin Parmisano, & Maria Jose Erquiaga. (2020). IoT-23: A labeled dataset with malicious and benign IoT network traffic (Version 1.0.0) [Data set]. Zenodo. http://doi.org/10.5281/zenodo.4743746

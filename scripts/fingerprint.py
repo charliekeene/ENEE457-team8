@@ -61,7 +61,7 @@ class Fingerprint:
 
         # check protocol
         if self.allowed_protocols and protoccol not in self.allowed_protocols:
-            violations.append(f"Disallowed protoccol: {protoccol}")
+            violations.append(f"Disallowed protocol: {protoccol}")
 
         # check ports
         if self.allowed_ports:
