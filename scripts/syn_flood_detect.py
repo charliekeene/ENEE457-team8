@@ -4,9 +4,13 @@
 # without completion. The result is that the server must manage a large amount of these unfinished handshakes resulting in a
 # large consumption of resources and therefore a denial of resources towards normal usage.
 
-from scapy.all import sniff, TCP, IP
-from globals import log
+from scapy.all import TCP, IP
 import time
+import logging
+
+logger = logging.getLogger("ids")
+FORMAT = "%(created)f %(message)s"
+logging.basicConfig(level=logging.INFO, format=FORMAT, filename="logs/ids.log")
 
 class syn_flood_detect:
     def __init__(self, ip_threshold=1000, total_threshold=5000, window_size=5):
@@ -40,12 +44,12 @@ class syn_flood_detect:
                 # Detect SYN Flood (only one detection/report per window)
                 # DoS Check
                 if (self.syn_counts[key] > self.IP_THRESHOLD) and (self.detected == False):
-                    log(f"SYN Flood (DoS), {src_ip}, {dport}")
+                    logger.info(f"SYN Flood (DoS), {src_ip}, {dport}")
                     self.detected = True
 
                 # DDoS Check
                 if (self.total_syn_count > self.TOTAL_THRESHOLD) and (self.detected == False):
-                    log(f"SYN Flood (DDoS), n/a, {dport}")
+                    logger.info(f"SYN Flood (DDoS), n/a, {dport}")
                     self.detected = True
 
         current_time = time.time()

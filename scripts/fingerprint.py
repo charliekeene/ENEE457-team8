@@ -1,7 +1,10 @@
-from scapy.all import sniff, IP, TCP, UDP, ICMP, ARP
-from collections import Counter
-from globals import log
+from scapy.all import IP, TCP, UDP, ICMP, ARP
 import json
+import logging
+
+logger = logging.getLogger("ids")
+FORMAT = "%(created)f %(message)s"
+logging.basicConfig(level=logging.INFO, format=FORMAT, filename="logs/ids.log")
 
 class Fingerprint:
     def __init__(self, config_path):
@@ -72,4 +75,4 @@ class Fingerprint:
         # *** LOG VIOLATIONS ***
         if violations:
             violations_str = ";".join(violations)
-            log(f"{violations_str}, {src}, {dport},")
+            logger.info(f"{violations_str}, {src}, {dport},")

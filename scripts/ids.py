@@ -1,7 +1,5 @@
-from scapy.all import sniff, TCP, IP
-import time
+from scapy.all import sniff
 import syn_flood_detect
-from globals import log
 import subprocess
 import re
 import fingerprint
