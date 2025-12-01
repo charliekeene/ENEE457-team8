@@ -1,0 +1,6 @@
+services:
+  monitor:
+    image: <your_monitor_image>
+    volumes:
+      - ./data/normal_profile.json:/app/data/normal_profile.json:ro
+      ...
