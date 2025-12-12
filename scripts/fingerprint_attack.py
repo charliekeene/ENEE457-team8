@@ -3,7 +3,7 @@ import random
 import os
 from scapy.all import Ether, IP, TCP, UDP, Raw, wrpcap, send
 
-hosts = ["actor2_sim", "actor3_sim", "phillips_hue_sim", "somfy_sim", "amazon_alexa_sim"]
+hosts = ["actor1_sim", "actor2_sim", "actor3_sim", "phillips_hue_sim", "somfy_sim", "amazon_alexa_sim"]
 
 class BadTrafficGenerator:
     def __init__(self, config_path):

